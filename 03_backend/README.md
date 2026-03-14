@@ -1,0 +1,15 @@
+## Backend Development
+
+#### Packages
+1. [Nodemon](https://www.npmjs.com/package/nodemon)
+2. [Prettier](https://www.npmjs.com/package/prettier)
+3. [Dotenv](https://www.npmjs.com/package/dotenv)
+4. [Mongoose](https://mongoosejs.com/docs/)
+5. [Express](https://expressjs.com/en/starter/installing.html)
+6. [Cookie parser](https://www.npmjs.com/package/cookie-parser)
+7. [Cors](https://www.npmjs.com/package/cors)
+8. [Mongoose aggregate paginate v2](https://www.npmjs.com/package/mongoose-aggregate-paginate-v2)
+9. [Bcrypt](https://www.npmjs.com/package/bcrypt)
+10. [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+11. []()
+12. []()
