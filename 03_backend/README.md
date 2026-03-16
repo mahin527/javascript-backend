@@ -1,6 +1,6 @@
 ## Backend Development
 
-#### Packages
+#### Packages and Services
 1. [Nodemon](https://www.npmjs.com/package/nodemon)
 2. [Prettier](https://www.npmjs.com/package/prettier)
 3. [Dotenv](https://www.npmjs.com/package/dotenv)
@@ -11,5 +11,11 @@
 8. [Mongoose aggregate paginate v2](https://www.npmjs.com/package/mongoose-aggregate-paginate-v2)
 9. [Bcrypt](https://www.npmjs.com/package/bcrypt)
 10. [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
-11. []()
-12. []()
+11. [Multer](https://www.npmjs.com/package/multer)
+12. [Cloudinary](https://cloudinary.com/pricing)
+13. [fs](https://www.tutorialspoint.com/nodejs/nodejs_file_system.htm)
+14. []()
+15. []()
+16. []()
+17. []()
+18. []()

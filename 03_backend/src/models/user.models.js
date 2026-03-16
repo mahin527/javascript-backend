@@ -12,18 +12,18 @@ const userSchema = new Schema(
             trim: true,
             index: true
         },
+        fullName: {
+            type: String,
+            required: true,
+            trim: true,
+            index: true
+        },
         email: {
             type: String,
             required: true,
             unique: true,
             lowercase: true,
             trim: true,
-        },
-        fullName: {
-            type: String,
-            required: true,
-            trim: true,
-            index: true
         },
         avatar: {
             type: String, // cloudinary url
@@ -51,14 +51,18 @@ const userSchema = new Schema(
     }
 )
 
-userSchema.pre('save', async function (next) {
-    if (this.isModified('password')) {
-        this.password = bcrypt.hash(this.password, 10)
-        next()
-    }
+// userSchema.pre('save', async function (next) {
 
-    // if(!this.isModified('password')) return next ()
+//     if (!this.isModified('password')) return next()
 
+//     this.password = await bcrypt.hash(this.password, 10)
+//     next()
+// })
+
+userSchema.pre('save', async function () {
+    if (!this.isModified('password')) return
+
+    this.password = await bcrypt.hash(this.password, 10)
 })
 
 userSchema.methods.isPasswordCorrect = async function (password) {
@@ -75,7 +79,7 @@ userSchema.methods.generateAccessToken = function () {
         },
         process.env.ACCESS_TOKEN_SECRET,
         {
-            expiresIn: process.env.ACCESS_TOKEN_EXPIARY
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
         }
     )
 }
@@ -87,7 +91,7 @@ userSchema.methods.generateRefreshToken = function () {
         },
         process.env.REFRESH_TOKEN_SECRET,
         {
-            expiresIn: process.env.REFRESH_TOKEN_EXPIARY
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
         }
     )
 }
