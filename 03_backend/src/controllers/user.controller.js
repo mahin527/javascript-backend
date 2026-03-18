@@ -4,7 +4,7 @@ import { User } from '../models/user.models.js'
 import { uploadOnCloudinary } from '../utils/cloudinary.js'
 import { ApiResponse } from '../utils/ApiResponse.js'
 import jwt from 'jsonwebtoken'
-import { Aggregate } from 'mongoose'
+import mongoose from 'mongoose';
 
 const registerUser = asyncHandler(async (req, res) => {
 
@@ -181,9 +181,14 @@ const logoutUser = asyncHandler(async (req, res) => {
     await User.findByIdAndUpdate(
         req.user._id,
         {
-            $set: {
-                refreshToken: undefined
-            },
+            // $set: {
+            //     refreshToken: undefined
+            // }, there was an issue, so i prefer $unset
+
+            $unset: {
+                refreshToken: 1
+
+            }
         },
         {
             new: true
@@ -210,7 +215,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     }
 
     try {
-        const decodedToken = jwt.verify(incomingRefreshToken, process.env.ACCESS_TOKEN_SECRET)
+        const decodedToken = jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN_SECRET)
 
         const user = await User.findById(decodedToken?._id)
 
@@ -249,7 +254,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 const changeCurrentPassword = asyncHandler(async (req, res) => {
     const { oldPassword, newPassword } = req.body
 
-    const user = User.findById(req.user?._id)
+    const user = await User.findById(req.user?._id)
     const isPasswordCorrect = await user.isPasswordCorrect(oldPassword)
 
     if (!isPasswordCorrect) {
@@ -268,7 +273,9 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 })
 
 const getCurrentUser = asyncHandler(async (req, res) => {
-    return res.status(200).json(200, req.user, 'Current user fetched successfully!')
+    return res.status(200).json(
+        new ApiResponse(200, req.user, 'Current user fetched successfully!')
+    )
 })
 
 const updateAccountDetails = asyncHandler(async (req, res) => {
@@ -407,9 +414,9 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
                 $project: {
                     fullName: 1,
                     username: 1,
-                    subscribersCount,
-                    channelSubscribedToCount,
-                    isSubscribed,
+                    subscribersCount: 1,
+                    channelSubscribedToCount: 1,
+                    isSubscribed: 1,
                     avatar: 1,
                     coverImage: 1,
                     email: 1
@@ -464,11 +471,11 @@ const getWatchHistory = asyncHandler(async (req, res) => {
                             $addFields: {
                                 owner: {
                                     $first: '$owner'
-                                } 
+                                }
                             }
                         }
                     ]
-                } 
+                }
             }
         ]
     )
@@ -493,5 +500,3 @@ export {
     getUserChannelProfile,
     getWatchHistory
 }
-
-
