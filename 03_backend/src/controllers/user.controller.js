@@ -97,6 +97,21 @@ const registerUser = asyncHandler(async (req, res) => {
         new ApiResponse(200, createdUser, 'User registered successfully')
     )
 
+    /*
+    This is a bit inconsistent. Normally, you would want res.status() and ApiResponse.statusCode to be the same. 
+    Otherwise, there could be confusion on the client side.
+
+    ## Clean pattern
+    You can write it like this if you want:
+    ```
+    return res.status(201).json(
+    new ApiResponse(201, createdUser, 'User registered successfully')
+    )
+    ```
+    
+    
+    */
+
 })
 
 const generateAccessAndRefreshTokens = async (userId) => {
