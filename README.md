@@ -2,6 +2,27 @@
 ```javascript
 npm init 
 ```
+## Backend Development
+
+#### Packages and Services
+1. [Nodemon](https://www.npmjs.com/package/nodemon)
+2. [Prettier](https://www.npmjs.com/package/prettier)
+3. [Dotenv](https://www.npmjs.com/package/dotenv)
+4. [Mongoose](https://mongoosejs.com/docs/)
+5. [Express](https://expressjs.com/en/starter/installing.html)
+6. [Cookie parser](https://www.npmjs.com/package/cookie-parser)
+7. [Cors](https://www.npmjs.com/package/cors)
+8. [Mongoose aggregate paginate v2](https://www.npmjs.com/package/mongoose-aggregate-paginate-v2)
+9. [Bcrypt](https://www.npmjs.com/package/bcrypt)
+10. [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+11. [Multer](https://www.npmjs.com/package/multer)
+12. [Cloudinary](https://cloudinary.com/pricing)
+13. [fs](https://www.tutorialspoint.com/nodejs/nodejs_file_system.htm)
+
+#### Topics
+1. [Mongodb aggregation pipelines](https://www.mongodb.com/docs/manual/core/aggregation-pipeline/)
+2. sub pipelines and routes
+
 
 ### [Mongoose](https://mongoosejs.com/docs/) 
 [Mongoose](https://mongoosejs.com/docs/) is an Object Data Modeling (ODM) library for MongoDB. Simply put, it acts as a middleman between Node.js and MongoDB, making connecting to databases and managing data much easier and more streamlined.

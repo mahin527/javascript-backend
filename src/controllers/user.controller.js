@@ -79,10 +79,14 @@ const registerUser = asyncHandler(async (req, res) => {
         }
     )
 
-    // 8. check if user created successfully - then select password and redresh token for remove
+    // 8. check if user created successfully - then select password and refresh token for remove
 
     const createdUser = await User.findById(user._id).select(
         '-password -refreshToken'
+        /*
+        With `.select()` you can include or exclude specific fields from the query result. '-password -refreshToken' means exclude the password and refreshToken fields.
+        Password/RefreshToken/sensitive data should never be sent to the client, even in a hashed state.
+        */
     )
 
     // 9. check for user creation
@@ -94,7 +98,7 @@ const registerUser = asyncHandler(async (req, res) => {
     // 10. return response
 
     return res.status(201).json(
-        new ApiResponse(200, createdUser, 'User registered successfully')
+        new ApiResponse(201, createdUser, 'User registered successfully')
     )
 
     /*
@@ -175,6 +179,7 @@ const loginUser = asyncHandler(async (req, res) => {
         secure: true
     }
 
+    // 7. return response 
     return res.status(200)
         .cookie('accessToken', accessToken, options)
         .cookie('refreshToken', refreshToken, options)
